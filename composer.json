@@ -1,0 +1,22 @@
+{
+  "name": "occ2/nette-mapy-cz",
+  "description": "Map control and form map picker based on MAPY.CZ API for Nette Framework",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Milan Onderka",
+      "email": "milan_onderka@occ2.cz"
+    }
+  ],
+  "require": {
+    "php": "^7.2",
+    "nette/application": "^2.4",
+    "nette/forms": "^2.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "MapyCZ\\": "src"
+    }
+  }
+}
