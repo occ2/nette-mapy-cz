@@ -3,6 +3,7 @@
 namespace MapyCZ;
 
 use MapyCZ\Exceptions\MapException;
+use MapyCZ\MapControls\IMapControl;
 use Nette\SmartObject;
 
 /**
@@ -17,6 +18,7 @@ use Nette\SmartObject;
  * @property-write int $zoom
  * @property-write float $centerLatitude
  * @property-write float $centerLongitude
+ * @property-write bool|array $controls
  */
 trait TMap
 {
@@ -34,8 +36,19 @@ trait TMap
 			"latitude" => 50,
 			"longitude" => 15
 		],
-		"zoom" => 13
+		"zoom" => 13,
+		"controls" => true
 	];
+
+	/**
+	 * @param bool|array $controls
+	 * @return $this
+	 */
+	public function setControls($controls)
+	{
+		$this->settings["controls"] = $controls;
+		return $this;
+	}
 
 	/**
 	 * @param array $settings
@@ -141,6 +154,16 @@ trait TMap
 	public function setMapType(string $mapType)
 	{
 		$this->settings["mapType"] = $mapType;
+		return $this;
+	}
+
+	/**
+	 * @param IMapControl $control
+	 * @return $this
+	 */
+	public function addControl(IMapControl $control)
+	{
+		$this->settings["controls"][] = $control;
 		return $this;
 	}
 }
