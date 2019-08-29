@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace MapyCZ\MapControls;
 
@@ -8,8 +8,8 @@ namespace MapyCZ\MapControls;
  */
 interface IMapControl
 {
-	/**
-	 * @return string
-	 */
-	public function __toString():string;
+    /**
+     * @return string
+     */
+    public function __toString(): string;
 }

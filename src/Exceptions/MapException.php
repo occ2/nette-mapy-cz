@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace MapyCZ\Exceptions;
 
@@ -10,6 +10,7 @@ use Exception;
  */
 class MapException extends Exception
 {
-	const INVALID_LATITUDE = 0001;
-	const INVALID_LONGITUDE = 0002;
+    const INVALID_LATITUDE = 0001;
+    const INVALID_LONGITUDE = 0002;
+    const INVALID_VALUE = 0003;
 }

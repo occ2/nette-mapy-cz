@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace MapyCZ\Controls\MapControl\Factories;
 
@@ -10,8 +10,8 @@ use MapyCZ\Controls\MapControl;
  */
 interface IMapControlFactory
 {
-	/**
-	 * @return MapControl
-	 */
-	public function create(): MapControl;
+    /**
+     * @return MapControl
+     */
+    public function create(): MapControl;
 }

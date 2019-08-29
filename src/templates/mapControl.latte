@@ -1,16 +1,6 @@
-<div id="{$settings['htmlId']}" style="{ifset $settings['width'}width:{$settings['width'}}px; {/ifset}{ifset $settings['height'}height:{$settings['height'}}px; {/ifset}"></div>
-
-<script>
-    let __center = SMap.Coords.fromWGS84({$settings['center']['longitude']}, {$settings['center']['latitude']});
-    let __map = new SMap(JAK.gel({$settings['htmlId']}), __center, {$settings['zoom']});
-    __map.addDefaultLayer(SMap.{$settings['mapType']}).enable();
-
-    {if $settings['controls'] == true}
-    __map.addDefaultControls();
-    {elseif is_array($settings['controls'])}
-        {foreach $settings['controls'] as $control}
-            {$control|noescape}
-        {/foreach}
-    {/if}
-
+<div id="{$settings['mapId']}"></div>
+<script type="text/javascript">
+    const settings = JSON.parse({$settings|json});
+    const mapControl = MapyCZ.Factory.createMapControl(document, settings);
+    mapControl.init();
 </script>

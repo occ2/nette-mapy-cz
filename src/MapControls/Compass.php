@@ -1,40 +1,46 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace MapyCZ\MapControls;
 
+/**
+ * Class Compass
+ * @package MapyCZ\MapControls
+ *
+ * @todo
+ */
 class Compass implements IMapControl
 {
-	/**
-	 * @var int
-	 */
-	public $left = 10;
+    /**
+     * @var int
+     */
+    public $left = 10;
 
-	/**
-	 * @var int
-	 */
-	public $top = 10;
+    /**
+     * @var int
+     */
+    public $top = 10;
 
-	/**
-	 * @var int
-	 */
-	public $panAmount = 1;
+    /**
+     * @var int
+     */
+    public $panAmount = 1;
 
-	/**
-	 * @var string
-	 */
-	public $title = "Kompas";
+    /**
+     * @var string
+     */
+    public $title = "Kompas";
 
-	/**
-	 * @var int
-	 */
-	public $moveThreshold = 300;
+    /**
+     * @var int
+     */
+    public $moveThreshold = 300;
 
-	/**
-	 * @return string
-	 */
-	public function __toString(): string
-	{
-		return '
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return '
 			let compass = new SMap.Control.Compass({
 				title: ' . $this->title . ',
 				panAmount: ' . $this->panAmount . ',
@@ -45,5 +51,5 @@ class Compass implements IMapControl
 				top:' . $this->top . '"px"
 			});
 		';
-	}
+    }
 }

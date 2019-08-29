@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>api4.mapy.cz - ukázka odečítání souřadnic</title>
+    <script type="text/javascript" src="https://api.mapy.cz/loader.js"></script>
+    <script type="text/javascript">Loader.load();</script>
+
+
+</head>
+<body id="advanced-coordinates">
+<div id="map"></div>
+<input type="text" name="GPS" data-type="gps-input" id="gpsInput">
+<script type="module">
+    import {MapFactory} from "./assets/mapFactory.js";
+
+    const settings = {
+        center: {
+            latitude: 50,
+            longitude: 15
+        },
+        defaultZoom: 10,
+        mapId: "map",
+        units:  "px",
+        width:  600,
+        height: 400,
+        mapType: 1
+    };
+
+    document.onreadystatechange = function() {
+        if(document.readyState === 'complete'){
+            const mapPicker = MapFactory.createMapPicker(document, settings);
+            mapPicker.init();
+        }
+    }
+</script>
+</body>
+</html>

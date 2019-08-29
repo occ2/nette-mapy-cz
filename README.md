@@ -15,6 +15,10 @@ Map coordinates picker and map control using mapy.cz API for Nette Framework
 ## Create simple map control
 Register control factory as service in your config.neon
 ```
+latte.latteFactory:
+    setup:
+        - addFilter(json, Filters::json)
+
 services:
     -   MapyCZ\Controls\MapControl\Factories\IMapControlFactory
 ```
@@ -43,7 +47,7 @@ protected function createComponentMap(string $name): MapControl
         "htmlId" => "map", // HTML id of map element
         "width" => 400, // map width in pixels
         "height" => 300, // map height in pixels
-        "mapType" => "DEF_BASE", // default map
+        "mapType" => 1, // default map
         "center" => [ // default center of map
             "latitude" => 50,
             "longitude" => 15
