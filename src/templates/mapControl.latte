@@ -1,0 +1,6 @@
+<div id="{$settings['mapId']}"></div>
+<script type="text/javascript">
+    const settings = JSON.parse({$settings|json});
+    const mapControl = MapyCZ.Factory.createMapControl(document, settings);
+    mapControl.init();
+</script>
