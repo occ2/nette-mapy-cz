@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace MapyCZ\Controls\MapControl\Factories;
+namespace MapyCZ\Factories;
 
 use MapyCZ\Controls\MapControl;
 
