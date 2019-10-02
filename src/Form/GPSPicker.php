@@ -46,7 +46,7 @@ class GPSPicker extends TextInput
      * @return Html
      * @throws JsonException
      */
-    public function getControl()
+    public function getControl(): Html
     {
         $control = parent::getControl();
         $map = Html::el("div", ["id" => $this->settings["mapId"]]);
