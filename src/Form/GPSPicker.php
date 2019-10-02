@@ -51,7 +51,7 @@ class GPSPicker extends TextInput
         $control = parent::getControl();
         $map = Html::el("div", ["id" => $this->settings["mapId"]]);
         $this->settings["formControlId"] = $this->getHtmlId();
-        if (!empty($this->value)) {
+        if (!empty($this->value) && is_string($this->value)) {
             $v = explode(" ", $this->value);
             $this->settings["valueLatitude"] = $v[0];
             $this->settings["valueLongitude"] = $v[1];
@@ -70,22 +70,29 @@ class GPSPicker extends TextInput
     }
 
     /**
-     * @return ArrayHash
+     * @return ArrayHash|null
      * @throws MapException
      */
-    public function getValue(): ArrayHash
+    public function getValue(): ?ArrayHash
     {
-        $a = explode(" ", $this->value);
-        if (count($a) != 2) {
-            throw new MapException(
-                "ERROR: Invalid value",
-                MapException::INVALID_VALUE
-            );
+        if (is_string($this->value)) {
+            if (!empty($this->value)) {
+                $a = explode(" ", $this->value);
+                if (count($a) != 2) {
+                    throw new MapException(
+                        "ERROR: Invalid value",
+                        MapException::INVALID_VALUE
+                    );
+                }
+                $this->value = ArrayHash::from([
+                    "latitude" => $this->validateLatitude((float)$a[0]),
+                    "longitude" => $this->validateLongitude((float)$a[1]),
+                ]);
+            } else {
+                $this->value = null;
+            }
         }
-        $this->value = ArrayHash::from([
-            "latitude" => $this->validateLatitude((float) $a[0]),
-            "longitude" => $this->validateLongitude((float) $a[1]),
-        ]);
+
         return parent::getValue();
     }
 
