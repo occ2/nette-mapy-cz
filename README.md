@@ -2,13 +2,15 @@
 Map coordinates picker and map control using mapy.cz API for Nette Framework
 
 ## Installation
-`composer require occ2/nette-mapy-cz`
+```bash
+composer require occ2/nette-mapy-cz
+```
 
 ## Install JS file
 Add assets/mapycz.js into your web directory (www/js etc.)
 
 ## Add MAPY.CZ loader and project javascript files to your page heading
-```
+```html
 <head>
 	<script src="https://api.mapy.cz/loader.js"></script>
 	<script>Loader.load()</script>
@@ -18,24 +20,23 @@ Add assets/mapycz.js into your web directory (www/js etc.)
 
 ## Setup config
 Register control factory as service in your config.neon register extension add picker to you forms
-```
-latte.latteFactory:
-	# add filter json to your latte engine 
-    setup:
-        - addFilter(json, Filters::json)
-
+```yaml
 # register method addGpsPicker to youe forms
 extensions:
-	mapycz: MapyCZ\DI\GPSPickerExtension
+  mapycz: MapyCZ\DI\GPSPickerExtension
 
-# create map control factory service
 services:
-    -   MapyCZ\Controls\MapControl\Factories\IMapControlFactory
+  # add filter json to your latte engine 
+  nette.latteFactory:
+    setup:
+      - addFilter(json, MapyCZ\Helpers\Filters::json)
+  # create map control factory service
+  - MapyCZ\Controls\MapControl\Factories\IMapControlFactory
 ```
 
 ## Usage 
 In your presenter
-```
+```php
 use MapyCZ\Controls\MapControl\Factories\IMapControlFactory;
 use MapyCZ\Controls\MapControl;
 use Nette\Application\UI\Form;
@@ -63,10 +64,10 @@ protected function createComponentMap(string $name): MapControl
         "mapType" => 1, // default map
         "center" => [ // default center of map
             "latitude" => 50,
-            "longitude" => 15
+            "longitude" => 15,
         ],
-        "defaultZoom" => 13 // default zoom
-        "controls" => true // show controls
+        "defaultZoom" => 13, // default zoom
+        "controls" => true, // show controls
     ];
     $this->addComponent($map, $name);
     return $map;
@@ -92,10 +93,10 @@ protected function createComponentForm(string $name): Form
                 "units" =>  "px",
                 "center" => [
                     "latitude" => 50,
-                    "longitude" => 15
+                    "longitude" => 15,
                 ],
                 "defaultZoom" => 12,
-                "controls" => true
+                "controls" => true,
              ]);
 	..
 	
@@ -106,7 +107,7 @@ protected function createComponentForm(string $name): Form
 
 GPS picker validate coordinates (latitude -90 - 90, longitude -180 - 180) on server side.
 and returns ArrayHash with latitude and longitude properties
-```
+```php
 	 $values = $form->getValues();
 	 $latitude = $values->gps->latitude;
 	 $longitude = $values->gps->longitude;
